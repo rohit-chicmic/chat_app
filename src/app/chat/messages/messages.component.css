@@ -1,0 +1,45 @@
+img {
+    cursor: pointer;
+    height: 50px;
+  }
+  
+  .d-none {
+    display: none;
+  }
+  
+  .b-me {
+    background-color: white;
+    color: black;
+    align-self: flex-start;
+  }
+  
+  .b-o {
+    background-color: rgb(237, 251, 220);
+    color: black;
+    align-self: flex-end;
+  }
+  
+  .send {
+    margin-left: auto !important;
+  }
+  
+  .bottom-0 {
+    bottom: 0;
+  }
+  
+  .sc-area {
+    overflow-y: auto;
+    max-height: 550px;
+    height: 90%;
+    background-size: cover;
+    background-position: center;
+    
+  }
+  li {
+    width: fit-content;
+    border-radius: 20px !important;
+    min-width: 50%;
+    opacity: 0.9;
+    border-top-width: 1px !important;
+  }
+  

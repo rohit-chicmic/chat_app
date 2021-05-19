@@ -1,0 +1,7 @@
+<div class="card flex-row flex-wrap align-items-center mb-3"
+     [ngClass]="_selectedUserId === _user._id?'bg-dark text-white': ''">
+  <div class="card-block px-2">
+    <h4 class="card-title"> {{_user?.name}}</h4>
+  </div>
+  <div *ngIf="_user.newMessagesCount > 0" class="new_message">{{_user.newMessagesCount}}</div>
+</div>

@@ -1,0 +1,55 @@
+<div class="login">
+    <h2 class="login-header">Register</h2>
+    <form [formGroup]="form" class="login-container" (ngSubmit)="register()">
+
+        <p [ngClass]="{ 'has-error': submitted && f.name.errors }">
+            <input type="text" placeholder="Name" formControlName="name">
+        </p>
+      
+        <div *ngIf="f.email.errors" class="help-block">
+            <div class="warn" *ngIf="f.name.touched && f.email.errors.required">*name is required</div>
+        </div>
+        
+      <p [ngClass]="{ 'has-error': submitted && f.email.errors }">
+        <input type="email" placeholder="Email" formControlName="email">
+      </p>
+  
+      <div *ngIf="f.email.errors" class="help-block">
+        <div class="warn" *ngIf="f.email.touched && f.email.errors.required">*email is required</div>
+        <div class="warn" *ngIf="f.email.touched && f.email.errors.pattern">*email is invalid</div>
+      </div>
+
+      <p [ngClass]="{ 'has-error': submitted && f.phone.errors }">
+        <input type="text" placeholder="Phone No" formControlName="phone">
+      </p>
+  
+      <div *ngIf="f.phone.errors" class="help-block">
+        <div class="warn" *ngIf="f.phone.touched && f.phone.errors.required">*phone no is required</div>
+        <div class="warn" *ngIf="f.phone.touched && f.phone.errors.pattern">*phone number is not valid</div>
+      </div>
+
+      <p [ngClass]="{ 'has-error': submitted && f.address.errors }">
+        <input type="text" placeholder="Address" formControlName="address">
+      </p>
+  
+      <div *ngIf="f.address.touched && f.address.errors" class="help-block">
+        <div class="warn" *ngIf="f.address.errors.required">*address is required</div>
+      </div>
+  
+      <p [ngClass]="{ 'has-error': submitted && f.password.errors }">
+        <input type="password" placeholder="Password" formControlName="password">
+      </p>
+  
+      <div *ngIf="f.password.touched && f.password.errors" class="help-block">
+        <div class="warn" *ngIf="f.password.errors.required">*password is required</div>
+        <div class="warn" *ngIf="f.password.errors.pattern">*password length should be 6-12</div>
+
+      </div>
+  
+      <p>
+        <button type="submit" class="btn btn-success">Register</button> &nbsp;&nbsp;
+        <a routerLink='../login'>already registered? goto login</a>
+  
+      </p>
+    </form>
+  </div>

@@ -1,0 +1,20 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" (click)='logout()'>Logout</a>
+    </div>
+  </nav>
+
+<div class="row p-5">
+    <div class="col-4">
+      <div class="users_container">
+        <ul>
+          <li *ngFor="let user of $users | async" (click)="startChatWith(user)" class="cursor-pointer">
+            <app-user [user]="user" [selectedUserId]="chatWithUser?._id"></app-user>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-8">
+      <app-messages [currentUser]="currentUser" [messageHistory]="messageHistory" [otherUser]="chatWithUser"></app-messages>
+    </div>
+  </div>
