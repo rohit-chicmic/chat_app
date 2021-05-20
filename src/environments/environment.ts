@@ -5,8 +5,8 @@
 export const environment = {
   production: false
 };
-export const BaseUrl = "https://721c034f7f72.ngrok.io s";
-export const urlShort = '';
+export const BaseUrl = "http://c216350fab48.ngrok.io";
+export const urlShort = 'http://c216350fab48.ngrok.io';
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

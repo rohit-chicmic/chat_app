@@ -10,13 +10,13 @@ img {
   .b-me {
     background-color: white;
     color: black;
-    align-self: flex-start;
+    align-self: flex-end;
   }
   
   .b-o {
     background-color: rgb(237, 251, 220);
     color: black;
-    align-self: flex-end;
+    align-self: flex-start;
   }
   
   .send {
@@ -29,10 +29,12 @@ img {
   
   .sc-area {
     overflow-y: auto;
-    max-height: 550px;
-    height: 90%;
+    
     background-size: cover;
     background-position: center;
+    height: 90%;
+    border: 1px solid #ccc;
+    margin: 0 0 8px 0;
     
   }
   li {
@@ -43,3 +45,57 @@ img {
     border-top-width: 1px !important;
   }
   
+  .chat {
+    width: 50%;
+  }
+
+  .chatBox {
+    height: 800px;
+    border: 1px solid #ccc;
+    margin: 0 0 8px 0;
+  }
+
+  .sendButton {
+    width: 20%;
+    height: 30px;
+  }
+
+  .textBox {
+    border: 1px solid #ccc;
+    width: 78.5%;
+    height: 25px;
+  }
+
+  span.left_chat {
+    display: block;
+    float: left;
+    width: 80%;
+    margin: 25px;
+  }
+
+  span.right_chat {
+    display: block;
+    float: right;
+    width: 80%;
+    margin: 25px;
+    text-align: right;
+  }
+
+  .right_chat span {
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+
+  .left_chat span {
+    padding: 10px;
+    background: #ccc;
+  }
+
+  .receiverData {
+    background: #ffe9e9;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-weight: 600;
+    font-size: 20px;
+    text-align: center;
+  }

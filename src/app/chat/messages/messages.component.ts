@@ -13,7 +13,7 @@ import { ChatService } from '../services/chat.service';
 export class MessagesComponent implements OnInit, OnDestroy {
   private _currentUser: UserModel;
   private _otherUser: UserModel;
-  private _messageHistory: Array<MessageModel>;
+  _messageHistory : Array<any> = [];
   private $destroy = new Subject<boolean>();
 
   messageForm: FormGroup;
@@ -39,9 +39,6 @@ export class MessagesComponent implements OnInit, OnDestroy {
     this._otherUser = value;
   }
   
-  get messageHistory(): Array<MessageModel> {
-    return this._messageHistory;
-  }
 
   @Input()
   set messageHistory(value: Array<MessageModel>) {
@@ -53,27 +50,28 @@ export class MessagesComponent implements OnInit, OnDestroy {
     this.messageForm = new FormGroup({
       message: new FormControl(''),
     });
-    this.initHistory();
+    // this.initHistory();
+    this._messageHistory = [];
     this.handleNewMessages();
   }
 
-  private initHistory(): void {
-    this.chatService.getHistoryWith()
-    .pipe(takeUntil(this.$destroy))
-    .subscribe(value => {
-      this.messageHistory = value || [];
-      this.scrollToBottom();
-      if (this.messageHistory.some(message => !message.readed)) {
-        this.chatService.readMessagesWith(this._otherUser._id);
-      }
-    });
-  }
+  // private initHistory(): void {
+  //   this.chatService.getHistoryWith()
+  //   .pipe(takeUntil(this.$destroy))
+  //   .subscribe(value => {
+  //     this.messageHistory = value || [];
+  //     this.scrollToBottom();
+  //     if (this.messageHistory.some(message => !message.readed)) {
+  //       this.chatService.readMessagesWith(this._otherUser._id);
+  //     }
+  //   });
+  // }
 
   private handleNewMessages(): void {
     this.chatService.receiveMessage()
-      .pipe(takeUntil(this.$destroy))
       .subscribe(value => {
-        this.messageHistory.push(value);
+        this._messageHistory.push(value);
+        console.log(value)
         this.scrollToBottom();
         this.messageForm.reset();
       
@@ -101,12 +99,16 @@ export class MessagesComponent implements OnInit, OnDestroy {
 
   private generateMessage(): MessageModel {
     const message: MessageModel = {
-      receiverId: this.otherUser._id,
+      receiver: this.otherUser._id,
       senderId: this.currentUser._id
     };
     if (this.messageForm.controls.message.value) {
       message.message = this.messageForm.controls.message.value;
     }
+    console.log(this._messageHistory);
+    
+    this._messageHistory.push(message)
+
     return message;
   }
 

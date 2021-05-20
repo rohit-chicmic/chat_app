@@ -34,18 +34,18 @@ export class UserComponent implements OnInit, OnDestroy {
     private chatService: ChatService) { }
 
   ngOnInit(): void {
-    this.onNewMessages();
+    // this.onNewMessages();
   }
 
-  onNewMessages(){
-    this.userSocketService.newMessage().pipe(takeUntil(this.$destroy)).subscribe(message => {
-      if (this._user._id === message.senderId) {
-        this._user.newMessagesCount++;
-      } else {
-        this.chatService.readMessagesWith(this._user._id);
-      }
-    });
-  }
+  // onNewMessages(){
+  //   this.userSocketService.newMessage().pipe(takeUntil(this.$destroy)).subscribe(message => {
+  //     if (this._user._id === message.senderId) {
+  //       this._user.newMessagesCount++;
+  //     } else {
+  //       this.chatService.readMessagesWith(this._user._id);
+  //     }
+  //   });
+  // }
 
   ngOnDestroy(): void {
     this.userSocketService.removeAllListeners();

@@ -4,11 +4,14 @@
     </div>
   </nav>
 
+<p>{{currentUser.name}}</p>
+
 <div class="row p-5">
     <div class="col-4">
       <div class="users_container">
         <ul>
-          <li *ngFor="let user of $users | async" (click)="startChatWith(user)" class="cursor-pointer">
+          <!-- <li>Active users</li> -->
+          <li *ngFor="let user of $users" (click)="startChatWith(user)" class="cursor-pointer">
             <app-user [user]="user" [selectedUserId]="chatWithUser?._id"></app-user>
           </li>
         </ul>

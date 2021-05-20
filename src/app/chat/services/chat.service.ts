@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { Observable } from 'rxjs';
+import { UserModel, MessageModel} from 'src/app/constants';
+import { urlShort } from 'src/environments/environment';
 import { CONFIG } from '../utils/socket.config'
 
 @Injectable({
@@ -9,32 +11,40 @@ import { CONFIG } from '../utils/socket.config'
 export class ChatService extends Socket {
 
   constructor() {
-    super(CONFIG);
+    super({url:urlShort, options:{}});
    }
 
-   public connectToRoomWith(otherUserId: string): void {
-    this.emit('joinRoom', otherUserId);
-  }
+   public messageHistory: Array<MessageModel>;
 
-  public getHistoryWith(): Observable<Array<any>> {
-    return this.fromEvent('history');
-  }
-
-  // public disconnect(): void {
-  //   this.removeAllListeners();
-  //   this.disconnect();
+  //  public connectToRoomWith(otherUserId: string): void {
+  //   this.emit('joinRoom', otherUserId);
   // }
 
+  public loggedIn(user): void{
+    this.emit('loggedin', user);
+  }
+
+  // public getHistoryWith(): Observable<Array<any>> {
+  //   return this.fromEvent('history');
+  // }
+
+  public getUpdatedUser(): Observable<any>{
+    return this.fromEvent('updateUserList');
+  }
+
   public sendMessage(message: any) {
-    this.emit('send message', message);
+    this.emit('chatMessage', message);
+    console.log(message);
+    
   }
 
   public receiveMessage(): Observable<any> {
-    return this.fromEvent('getMessage');
+    return this.fromEvent('message');
+
   }
 
-  readMessagesWith(otherUserId: string) {
-    this.emit('readAllMessagesWith', otherUserId);
-  }
+  // readMessagesWith(otherUserId: string) {
+  //   this.emit('readAllMessagesWith', otherUserId);
+  // }
 }
 

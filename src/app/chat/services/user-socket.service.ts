@@ -15,9 +15,9 @@ export class UserSocketService extends Socket{
     super(CONFIG_FOR_USER);
   }
 
-  public newMessage(): Observable<MessageModel> {
-    return this.userService.getCurrentUser().pipe(take(1), exhaustMap(value =>
-      (this.fromEvent<MessageModel>('notification' + value._id))
-      ));
-  }
+  // public newMessage(): Observable<MessageModel> {
+  //   return this.userService.getCurrentUser().pipe(take(1), exhaustMap(value =>
+  //     (this.fromEvent<MessageModel>('notification' + value._id))
+  //     ));
+  // }
 }
