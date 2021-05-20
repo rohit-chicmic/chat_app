@@ -36,6 +36,10 @@ export class MessagesComponent implements OnInit, OnDestroy {
 
   @Input()
   set otherUser(value: UserModel) {
+    // if (!(this._otherUser == value)){
+    //   this._messageHistory.length = 0
+    // }
+
     this._otherUser = value;
   }
   
@@ -81,6 +85,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
 
   public onSubmit() {
     this.chatService.sendMessage(this.generateMessage());
+    this.messageForm.reset();
   }
 
 
@@ -88,7 +93,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
     try {
       setTimeout(() => {
         this.messageContainer.nativeElement.scroll({
-          top: this.messageContainer.nativeElement.scrollHeight,
+          bottom: this.messageContainer.nativeElement.scrollHeight,
           left: 0,
           behavior: 'smooth'
         });
