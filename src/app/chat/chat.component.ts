@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { from, Observable } from 'rxjs';
 import { catchError, map, take } from 'rxjs/operators';
 import { MessageModel, UserModel } from '../constants';
@@ -21,6 +21,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   constructor(
     private userService: UserService, 
     private route: ActivatedRoute,
+    private router: Router,
     private chatService: ChatService
   ) { }
 
@@ -48,6 +49,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   logout() {
     localStorage.clear();
+    this.router.navigateByUrl('login');
   }
 
   ngOnDestroy(): void {
