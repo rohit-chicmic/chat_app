@@ -11,7 +11,8 @@ import { CONFIG } from '../utils/socket.config'
 export class ChatService extends Socket {
 
   constructor() {
-    super({url:urlShort, options:{}});
+    // super({url:urlShort, options:{}});
+    super(CONFIG);
    }
 
    public messageHistory: Array<MessageModel>;
@@ -24,9 +25,10 @@ export class ChatService extends Socket {
     this.emit('loggedin', user);
   }
 
-  // public getHistoryWith(): Observable<Array<any>> {
-  //   return this.fromEvent('history');
-  // }
+  public  getHistoryWith(): Observable<Array<any>> {
+    
+    return this.fromEvent('getMessages');
+  }
 
   public getUpdatedUser(): Observable<any>{
     return this.fromEvent('updateUserList');
@@ -43,8 +45,8 @@ export class ChatService extends Socket {
 
   }
 
-  // readMessagesWith(otherUserId: string) {
-  //   this.emit('readAllMessagesWith', otherUserId);
-  // }
+  readMessagesWith(otherUserId: any) {
+    this.emit('getHistory', otherUserId);
+  }
 }
 

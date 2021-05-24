@@ -7,7 +7,7 @@ export const CONFIG: SocketIoConfig = {
     transportOptions: {
       polling: {
         extraHeaders: {
-          'Authorization': 'Bearer ' + token
+          'Authorization': token
         }
       }
     }
@@ -15,7 +15,7 @@ export const CONFIG: SocketIoConfig = {
 };
 
 export const CONFIG_FOR_USER: SocketIoConfig = {
-  url: urlShort + 'user', options: {
+  url: urlShort + '/user', options: {
     transportOptions: {
       polling: {
         extraHeaders: {

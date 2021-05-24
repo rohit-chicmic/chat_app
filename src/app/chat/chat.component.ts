@@ -29,6 +29,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.chatService.loggedIn(JSON.parse(localStorage.getItem('data')))
     this.initUsers();
     this.initCurrentUser();
+    this.router.onSameUrlNavigation;
   }
 
   private initUsers() {

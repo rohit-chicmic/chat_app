@@ -5,7 +5,7 @@ export const API_URL = {
 }
 
 export interface MessageModel {
-    senderId: string;
+    sender: string;
     receiver: string;
     message?: string;
     sendDate?: Date;

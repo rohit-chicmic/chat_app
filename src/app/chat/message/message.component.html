@@ -1,11 +1,11 @@
 <div class="d-flex">
-    <ng-container *ngIf="message.senderId === currentUser._id; else other">
+    <ng-container *ngIf="message.sender === currentUser._id; else other">
       <div class="mx-3 b-me order-2 align-self-center">
         {{message.message}}
       </div>
       <div class="b-o order-1 mr-auto message_block">
         <small class="order-2">
-          {{message.sendDate | datePipe}}
+          {{message.date | datePipe}}
         </small>
       </div>
     </ng-container>
@@ -16,7 +16,7 @@
       </div>
       <div class="b-me order-2 ml-auto message_block">
         <small class="order-1">
-          {{message.sendDate | datePipe}}
+          {{message.date | datePipe}}
         </small>
       </div>
     </ng-template>

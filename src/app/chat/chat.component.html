@@ -11,9 +11,13 @@
       <div class="users_container">
         <ul>
           <!-- <li>Active users</li> -->
-          <li *ngFor="let user of $users" (click)="startChatWith(user)" class="cursor-pointer">
+          <div *ngFor="let user of $users" >
+          <li *ngIf="user._id != currentUser._id" (click)="startChatWith(user)" class="cursor-pointer">
+            
             <app-user [user]="user" [selectedUserId]="chatWithUser?._id"></app-user>
+            
           </li>
+        </div>
         </ul>
       </div>
     </div>
