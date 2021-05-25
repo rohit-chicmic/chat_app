@@ -57,7 +57,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
       message: new FormControl(''),
     });
     this._messageHistory = [];
-    // this.initHistory();
+    // this.initHistory(); 
     
     this.handleNewMessages();
   }
