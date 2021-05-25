@@ -53,6 +53,7 @@
 }
 
 .login input[type="email"],
+.login input[type="file"],
 .login input[type="password"],
 .login input[type="text"] {
   background: #fff;

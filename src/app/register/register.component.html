@@ -18,6 +18,14 @@
         <div class="warn" *ngIf="f.email.touched && f.email.errors.required">*email is required</div>
         <div class="warn" *ngIf="f.email.touched && f.email.errors.pattern">*email is invalid</div>
       </div>
+      
+      
+      <p class="custom-file">
+        <input type="file" accept="image/*" (change)="onChange($event)" class="custom-file-input" id="image">
+        <label class="custom-file-label" for="image">{{file ? file.name : 'Choose profile pic'}}</label>
+      </p>
+    
+    
 
       <p [ngClass]="{ 'has-error': submitted && f.phone.errors }">
         <input type="text" placeholder="Phone No" formControlName="phone">

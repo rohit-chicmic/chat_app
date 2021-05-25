@@ -1,6 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { urlShort } from 'src/environments/environment';
 import { UserModel } from '../../constants'
 import { ChatService } from '../services/chat.service';
 import { UserSocketService } from '../services/user-socket.service';
@@ -46,6 +47,11 @@ export class UserComponent implements OnInit, OnDestroy {
   //     }
   //   });
   // }
+
+
+  buildImageSrc(path: string) {
+    return urlShort + '/images/' + path;
+  }
 
   ngOnDestroy(): void {
     this.userSocketService.removeAllListeners();

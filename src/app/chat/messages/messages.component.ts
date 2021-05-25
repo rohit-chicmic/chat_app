@@ -41,7 +41,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
     // }
 
     this._otherUser = value;
-    this.initHistory();
+    // this.initHistory();
 
   }
   
@@ -57,34 +57,35 @@ export class MessagesComponent implements OnInit, OnDestroy {
       message: new FormControl(''),
     });
     this._messageHistory = [];
-    this.initHistory();
+    // this.initHistory();
     
     this.handleNewMessages();
   }
 
-  private initHistory(): void {
+  // private initHistory(): void {
 
-    let his_with = {sender:this.currentUser._id, reciever: this.otherUser._id};
-    console.log(his_with);
+  //   let his_with = {sender:this.currentUser._id, reciever: this.otherUser._id};
+  //   console.log(his_with);
     
-    this.chatService.readMessagesWith(his_with);
-    this.chatService.getHistoryWith()
-    .pipe(takeUntil(this.$destroy))
-    .subscribe(value => {
-      console.log(value);
+  //   this.chatService.readMessagesWith(his_with);
+  //   this.chatService.getHistoryWith()
+  //   .pipe(takeUntil(this.$destroy))
+  //   .subscribe(value => {
+  //     console.log(value);
       
-      this._messageHistory = value || [];
-      this.scrollToBottom();
+  //     this._messageHistory = value || [];
+  //     this.scrollToBottom();
       
         
       
-    });
-  }
+  //   });
+  // }
 
   private handleNewMessages(): void {
     this.chatService.receiveMessage()
       .subscribe(value => {
-        this._messageHistory.push(value);
+        if(value.sender == this._otherUser._id){ 
+        this._messageHistory.push(value);}
         console.log(value)
         this.scrollToBottom();
         this.messageForm.reset();

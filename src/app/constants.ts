@@ -17,8 +17,11 @@ export interface MessageModel {
 
     constructor(
         public email: string, 
-        public name: string = 'n/a', 
+        public name: string, 
         public _id: any, 
-        public newMessagesCount?: number) {
+        public newMessagesCount?: number,
+        public photo?: string,
+        public isOnline?: boolean
+        ) {
     }
   }
