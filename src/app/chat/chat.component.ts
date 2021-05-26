@@ -17,6 +17,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   public currentUser;
   public messageHistory: Array<MessageModel>;
   public chatWithUser: UserModel;
+  pr = false;
 
   constructor(
     private userService: UserService, 
@@ -51,6 +52,11 @@ export class ChatComponent implements OnInit, OnDestroy {
   logout() {
     localStorage.clear();
     this.router.navigateByUrl('login');
+  }
+
+
+  profileTogle(){
+    this.pr = !this.pr;
   }
 
   ngOnDestroy(): void {

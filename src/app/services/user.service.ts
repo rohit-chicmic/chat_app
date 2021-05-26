@@ -25,4 +25,8 @@ export class UserService {
   getAllUsers(): Observable<any>{
     return this.httpService.getData(API_URL.GET_USER)
   }
+
+  uploadAvatar(data){
+    return this.httpService.postData(API_URL.AVATAR, data);
+  }
 }

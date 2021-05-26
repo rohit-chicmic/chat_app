@@ -8,9 +8,8 @@
 
 <div class="row p-5">
     <div class="col-4">
-      <div class="users_container">
+      <div class="users_container" #scrollableDiv>
         <ul>
-          <!-- <li>Active users</li> -->
           <div *ngFor="let user of $users" >
           <li *ngIf="user._id != currentUser._id" (click)="startChatWith(user)" class="cursor-pointer">
             
@@ -25,3 +24,9 @@
       <app-messages [currentUser]="currentUser" [messageHistory]="messageHistory" [otherUser]="chatWithUser"></app-messages>
     </div>
   </div>
+
+
+  <button class="btn btn-primary" (click)="profileTogle()">{{pr?"close":"update pic"}}</button>
+  <div *ngIf="pr">
+  <app-profile></app-profile>
+</div>

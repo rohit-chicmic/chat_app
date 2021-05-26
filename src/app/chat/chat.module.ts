@@ -11,6 +11,10 @@ import { ChatService } from './services/chat.service';
 import { UserSocketService } from './services/user-socket.service';
 import { DatePipe } from './utils/date.pipe';
 import { SocketIoModule } from 'ngx-socket-io';
+import { ProfileComponent } from './profile/profile.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpRequestInterceptor } from '../services/interceptor.service';
+
 
 
 @NgModule({
@@ -19,7 +23,8 @@ import { SocketIoModule } from 'ngx-socket-io';
     UserComponent,
     MessageComponent,
     MessagesComponent,
-    DatePipe
+    DatePipe,
+    ProfileComponent
   ],
   imports: [
     CommonModule,
@@ -27,6 +32,11 @@ import { SocketIoModule } from 'ngx-socket-io';
     ReactiveFormsModule,
     SocketIoModule
   ],
-  providers: [ChatService, UserSocketService]
+  providers: [ChatService, UserSocketService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpRequestInterceptor,
+      multi: true
+    }]
 })
 export class ChatModule { }
