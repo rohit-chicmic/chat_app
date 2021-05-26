@@ -50,7 +50,7 @@ export class UserComponent implements OnInit, OnDestroy {
 
 
   buildImageSrc(path: string) {
-    return urlShort + '/images/' + path;
+    return urlShort +'/'+ path;
   }
 
   ngOnDestroy(): void {

@@ -9,7 +9,7 @@ export interface MessageModel {
     sender: string;
     receiver: string;
     message?: string;
-    sendDate?: Date;
+    date?: Date;
     readed?: boolean;
   }
 
@@ -21,7 +21,7 @@ export interface MessageModel {
         public name: string, 
         public _id: any, 
         public newMessagesCount?: number,
-        public photo?: string,
+        public profileLink?: string,
         public isOnline?: boolean
         ) {
     }

@@ -122,7 +122,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
       message.message = this.messageForm.controls.message.value;
     }
     console.log(this._messageHistory);
-    
+    message.date = new Date()
     this._messageHistory.push(message)
 
     return message;
