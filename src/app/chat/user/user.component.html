@@ -7,5 +7,5 @@
   <div class="card-block px-2">
     <h4 class="card-title uname"> {{_user?.name}}</h4>
   </div>
-  <div *ngIf="_user.newMessagesCount > 0" class="new_message">{{_user.newMessagesCount}}</div>
+  <div *ngIf="_user.lastmsg[0]?.message" class="card-footer">{{_user.lastmsg[0]?.message}}</div>
 </div>

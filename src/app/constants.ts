@@ -17,12 +17,23 @@ export interface MessageModel {
   export class UserModel {
 
     constructor(
-        public email: string, 
+         
         public name: string, 
         public _id: any, 
-        public newMessagesCount?: number,
+        public email?: string,
+        // public newMessagesCount?: number,
         public profileLink?: string,
-        public isOnline?: boolean
+        public status?: boolean,
+        public lastmsg?: any
+
         ) {
     }
+  }
+
+  export interface TypingModel {
+
+    sender: string;
+    receiver: string;
+    status: boolean;
+
   }

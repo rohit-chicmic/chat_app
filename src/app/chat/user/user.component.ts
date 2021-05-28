@@ -26,7 +26,7 @@ export class UserComponent implements OnInit, OnDestroy {
   set selectedUserId(value:string) {
     this._selectedUserId = value;
     if (this._selectedUserId === this._user._id) {
-      this._user.newMessagesCount = 0;
+      // this._user.newMessagesCount = 0;
     }
     
   }

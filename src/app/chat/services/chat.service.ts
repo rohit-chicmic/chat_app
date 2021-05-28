@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { Observable } from 'rxjs';
-import { UserModel, MessageModel} from 'src/app/constants';
+import { UserModel, MessageModel, TypingModel} from 'src/app/constants';
 import { urlShort } from 'src/environments/environment';
 import { CONFIG } from '../utils/socket.config'
 
@@ -47,6 +47,14 @@ export class ChatService extends Socket {
 
   readMessagesWith(otherUserId: any) {
     this.emit('getHistory', otherUserId);
+  }
+
+  public sendTypingStatus(data){
+    this.emit('typing', data);
+  }
+
+  public getTypingStatus(): Observable<TypingModel>{
+    return this.fromEvent('getTyping');
   }
 }
 

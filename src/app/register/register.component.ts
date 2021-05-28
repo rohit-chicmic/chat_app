@@ -51,16 +51,7 @@ export class RegisterComponent implements OnInit {
   
   register(){
     this.submitted = true;
-    // const data = new FormData();
-    // data.append('name', this.f.name.value);
-    // data.append('email', this.f.email.value);
-    // data.append('phone', this.f.phone.value);
-    // data.append('password', this.f.password.value);
-    // data.append('address', this.f.address.value);
-
-    // if (this.file) {
-    //   data.append('avator', this.file);
-    // }
+    
     console.log(this.form.value);
     
     if (this.form.invalid){
@@ -69,18 +60,14 @@ export class RegisterComponent implements OnInit {
       
     }
 
-    
-
     this.userService.registerUser(this.form.value).subscribe(res => {
       console.log(res)
-      if(res.success){
-        this.router.navigate(['../login']);
-      }
+       
     });
       
     // console.log(data);
     
-    // this.router.navigate(['../login']);
+    this.router.navigate(['../login']);
     
   }
 

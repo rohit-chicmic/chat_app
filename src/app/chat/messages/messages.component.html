@@ -1,11 +1,14 @@
 <div class="d-flex flex-column h-100 position-relative">
-    <div class="sc-area" #scrollableDiv>
+    <div class="sc-area"  #scrollMe [scrollTop]="scrollMe.scrollHeight" style="height:350px;overflow-y:scroll;padding:0;">
       <ul class="d-flex list-unstyled flex-column">
         
         <li *ngFor="let message of _messageHistory" [ngClass]="message.sender === currentUser._id? 'b-me': 'b-o'"
             class="list-group-item mb-2">
           <app-message [message]="message" [currentUser]="currentUser" [otherUser]="otherUser"></app-message>
         </li>
+
+        <li class="b-o" *ngIf="tFlag">Typing...</li> 
+      
       
       </ul>
     </div>

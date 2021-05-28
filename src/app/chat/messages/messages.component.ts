@@ -15,11 +15,10 @@ export class MessagesComponent implements OnInit, OnDestroy {
   private _otherUser: UserModel;
   _messageHistory : Array<any> = [];
   private $destroy = new Subject<boolean>();
+  tFlag :boolean = false;
 
   messageForm: FormGroup;
-  @ViewChild('scrollableDiv', {
-    static: false
-  }) private messageContainer: ElementRef;
+  @ViewChild('scrollableDiv') private messageContainer: ElementRef;
 
   @Input()
   set currentUser(value:UserModel) {
@@ -36,10 +35,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
 
   @Input()
   set otherUser(value: UserModel) {
-    // if (!(this._otherUser == value)){
-    //   this._messageHistory.length = 0
-    // }
-
+    
     this._otherUser = value;
     this.initHistory();
 
@@ -58,7 +54,8 @@ export class MessagesComponent implements OnInit, OnDestroy {
     });
     this._messageHistory = [];
     // this.initHistory(); 
-    
+    this.handleTyping();
+    this.getTyping();
     this.handleNewMessages();
   }
 
@@ -93,22 +90,48 @@ export class MessagesComponent implements OnInit, OnDestroy {
       });
   }
 
+  private handleTyping(){
+    let typingStatus = {};
+    if(this.messageForm.controls.message.value != ''){
+      typingStatus = {
+        receiver: this.otherUser._id,
+        sender: this.currentUser._id,
+        status: true
+      };
+      
+    }
+    else {
+      typingStatus = {
+        receiver: this.otherUser._id,
+        sender: this.currentUser._id,
+        status: false
+    }
+  }
+      this.chatService.sendTypingStatus(typingStatus);
+    
+  }
+
+  private getTyping(){
+    this.chatService.getTypingStatus().subscribe(res => {
+      if(res.sender == this.otherUser._id){
+        this.tFlag = res.status; // TODO  implement typing feature
+      }
+    })
+  }
+
 
   public onSubmit() {
     this.chatService.sendMessage(this.generateMessage());
     this.messageForm.reset();
+    this.scrollToBottom();
   }
 
 
   private scrollToBottom(): void {
     try {
-      setTimeout(() => {
-        this.messageContainer.nativeElement.scroll({
-          bottom: this.messageContainer.nativeElement.scrollHeight,
-          left: 0,
-          behavior: 'smooth'
-        });
-      }, 1);
+      // setTimeout(() => {
+        this.messageContainer.nativeElement.scrollTop = this.messageContainer.nativeElement.scrollHeight;
+      // }, 1);
     } catch (err) {
     }
   }
