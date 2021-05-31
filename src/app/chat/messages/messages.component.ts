@@ -55,9 +55,10 @@ export class MessagesComponent implements OnInit, OnDestroy {
     });
     this._messageHistory = [];
     // this.initHistory(); 
-    this.handleTyping();
-    this.getTyping();
     this.handleNewMessages();
+    // this.handleTyping();
+    this.getTyping();
+    
   }
 
   private initHistory(): void {
@@ -79,12 +80,16 @@ export class MessagesComponent implements OnInit, OnDestroy {
     this.chatService.receiveMessage()
       .subscribe(value => {
         if(value.sender == this.otherUser._id){ 
+          
         this._messageHistory.push(value);}
         console.log(value)
+        
         // this.scrollToBottom();
-        this.messageForm.reset();
+        // this.messageForm.reset();
       
       });
+
+      this.tFlag = false;
   }
 
   public handleTyping(){
@@ -110,7 +115,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
       
       this.chatService.sendTypingStatus(typingStatus);
 
-      this.getTyping();
+      // this.getTyping();
   }
 
   private getTyping(){
@@ -127,8 +132,20 @@ export class MessagesComponent implements OnInit, OnDestroy {
   public onSubmit() {
     this.chatService.sendMessage(this.generateMessage());
     this.messageForm.reset();
+    // this.clearTyping();
     // this.scrollToBottom();
   }
+
+  // public clearTyping(){
+  //   let typingStatus = {
+  //     receiver: this.otherUser._id,
+  //     sender: this.currentUser._id,
+  //     status: false
+  //   };
+
+  //   this.chatService.sendTypingStatus(typingStatus);
+
+  // }
 
 
   // private scrollToBottom(): void {
