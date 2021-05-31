@@ -29,4 +29,8 @@ export class UserService {
   uploadAvatar(data){
     return this.httpService.postData(API_URL.AVATAR, data);
   }
+
+  getHistory(data){
+    return this.httpService.postData(API_URL.GET_History, data);
+  }
 }

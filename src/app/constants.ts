@@ -2,7 +2,8 @@ export const API_URL = {
     LOGIN: '/login',
     REGISTER: '/register',
     GET_USER: '/getusers',
-    AVATAR: '/profileimage'
+    AVATAR: '/profileimage',
+    GET_History: '/getHistory'
 }
 
 export interface MessageModel {

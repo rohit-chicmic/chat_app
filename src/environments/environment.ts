@@ -5,7 +5,7 @@
 export const environment = {
   production: false
 };
-export const BaseUrl = "https://fd96c9d7d08d.ngrok.io";
+export const BaseUrl = "https://2c41032a35db.ngrok.io";
 export const urlShort = BaseUrl;
 /*
  * For easier debugging in development mode, you can import the following file

@@ -19,7 +19,7 @@
           
           
           <input type="text" class="form-control col-7" id="inlineFormInputGroupUsername2" formControlName="message"
-                 placeholder="write a message..." autocomplete="off">
+                 placeholder="write a message..." autocomplete="off" #messageBox (ngModelChange)="handleTyping()">
           <button type="submit" class="btn btn-success col-3 ml-1 send">Send</button>
         </form>
       </div>

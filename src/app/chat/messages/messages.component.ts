@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MessageModel, UserModel } from 'src/app/constants';
+import { UserService } from 'src/app/services/user.service';
 import { ChatService } from '../services/chat.service';
 
 @Component({
@@ -18,7 +19,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
   tFlag :boolean = false;
 
   messageForm: FormGroup;
-  @ViewChild('scrollableDiv') private messageContainer: ElementRef;
+  @ViewChild('messageBox') private messageBox: ElementRef;
 
   @Input()
   set currentUser(value:UserModel) {
@@ -46,7 +47,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
   set messageHistory(value: Array<MessageModel>) {
     this._messageHistory = value;
   }
-  constructor( private chatService: ChatService) { }
+  constructor( private chatService: ChatService, private userService: UserService) { }
 
   ngOnInit(): void {
     this.messageForm = new FormGroup({
@@ -64,17 +65,13 @@ export class MessagesComponent implements OnInit, OnDestroy {
     let his_with = {sender:this.currentUser._id, receiver: this.otherUser._id};
     console.log(his_with);
     
-    this.chatService.readMessagesWith(his_with);
-    this.chatService.getHistoryWith()
-    .pipe(takeUntil(this.$destroy))
-    .subscribe(value => {
+    // this.chatService.readMessagesWith(his_with); //! removed because we have to get histry with api.
+    this.userService.getHistory(his_with).subscribe(value => {
       console.log(value);
       
       this._messageHistory = value || [];
-      this.scrollToBottom();
-      
-        
-      
+      // this.scrollToBottom();
+       
     });
   }
 
@@ -84,14 +81,16 @@ export class MessagesComponent implements OnInit, OnDestroy {
         if(value.sender == this.otherUser._id){ 
         this._messageHistory.push(value);}
         console.log(value)
-        this.scrollToBottom();
+        // this.scrollToBottom();
         this.messageForm.reset();
       
       });
   }
 
-  private handleTyping(){
+  public handleTyping(){
     let typingStatus = {};
+    console.log('inside handleTyping');
+    
     if(this.messageForm.controls.message.value != ''){
       typingStatus = {
         receiver: this.otherUser._id,
@@ -107,12 +106,17 @@ export class MessagesComponent implements OnInit, OnDestroy {
         status: false
     }
   }
+      console.log(typingStatus);
+      
       this.chatService.sendTypingStatus(typingStatus);
-    
+
+      this.getTyping();
   }
 
   private getTyping(){
     this.chatService.getTypingStatus().subscribe(res => {
+      console.log(res);
+      
       if(res.sender == this.otherUser._id){
         this.tFlag = res.status; // TODO  implement typing feature
       }
@@ -123,18 +127,18 @@ export class MessagesComponent implements OnInit, OnDestroy {
   public onSubmit() {
     this.chatService.sendMessage(this.generateMessage());
     this.messageForm.reset();
-    this.scrollToBottom();
+    // this.scrollToBottom();
   }
 
 
-  private scrollToBottom(): void {
-    try {
-      // setTimeout(() => {
-        this.messageContainer.nativeElement.scrollTop = this.messageContainer.nativeElement.scrollHeight;
-      // }, 1);
-    } catch (err) {
-    }
-  }
+  // private scrollToBottom(): void {
+  //   try {
+  //     // setTimeout(() => {
+  //       this.messageContainer.nativeElement.scrollTop = this.messageContainer.nativeElement.scrollHeight;
+  //     // }, 1);
+  //   } catch (err) {
+  //   }
+  // }
 
   private generateMessage(): MessageModel {
     const message: MessageModel = {
